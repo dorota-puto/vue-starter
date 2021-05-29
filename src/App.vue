@@ -2,7 +2,7 @@
 
   <div>
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
-    <div v-if="authenticatedEmail != ''">
+    <div v-if="authenticatedEmail == ''">
       <span>Zaloguj się e-mailem </span>
       <input type="email" v-model="email">
       <button @click="logIn()">Wchodzę</button>
@@ -18,6 +18,7 @@
 
 
 <script>
+import "milligram";
 
 export default {
   data() {
@@ -29,10 +30,10 @@ export default {
 },
 methods: {
   logIn() {
-    this.loggedIn=true;
+    this.authenticatedEmail=this.email;
   },
   logOut() {
-    this.loggedIn = false;
+    this.authenticatedEmail = '';
   }
 }
 };
