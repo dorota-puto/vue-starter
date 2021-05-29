@@ -1,28 +1,43 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+  <div>
+    <h1>Witaj w systemie do zapisów na zajęcia</h1>
+    <div v-if="authenticatedEmail != ''">
+      <span>Zaloguj się e-mailem </span>
+      <input type="email" v-model="email">
+      <button @click="logIn()">Wchodzę</button>
   </div>
+
+  <div v-else>
+    <h2>Witaj {{email}}</h2>
+    <button @click="logOut()">Wyloguj</button>
+    </div>
+  </div>
+
 </template>
 
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+  return {
+    email: '',
+    password: '',
+    authenticatedEmail: ''
+  };
+},
+methods: {
+  logIn() {
+    this.loggedIn=true;
+  },
+  logOut() {
+    this.loggedIn = false;
   }
 }
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
