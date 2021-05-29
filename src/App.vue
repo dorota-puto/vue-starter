@@ -2,15 +2,14 @@
 
   <div>
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
-    <div v-if="authenticatedEmail == ''">
-      <span>Zaloguj się e-mailem </span>
-      <input type="email" v-model="email">
-      <button @click="logIn()">Wchodzę</button>
+    <div v-if="authenticatedUsername == ''">
+      <login-form @login="logMeIn($event)"></login-form> 
   </div>
 
   <div v-else>
-    <h2>Witaj {{email}}</h2>
+    <h2>Witaj {{authenticatedUsername}}</h2>
     <button @click="logOut()">Wyloguj</button>
+    <meeting-page></meeting-page>>
     </div>
   </div>
 
@@ -18,22 +17,25 @@
 
 
 <script>
-import "milligram";
+import 'milligram'
+import LoginForm from "./LoginForm";
+import MeetingPage from "./meetings/MeetingPage";
+
 
 export default {
+  components: {LoginForm, MeetingPage},
+
   data() {
   return {
-    email: '',
-    password: '',
-    authenticatedEmail: ''
+    authenticatedUsername: ''
   };
 },
 methods: {
-  logIn() {
-    this.authenticatedEmail=this.email;
+  logMeIn(username) {
+  this.authenticatedUsername = username;
   },
   logOut() {
-    this.authenticatedEmail = '';
+    this.authenticatedUsername = '';
   }
 }
 };
